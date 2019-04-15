@@ -7,7 +7,7 @@ import Login from '../users/login';
 import Registration from '../users/registration';
 import { getCategories } from '../../actions/categories';
 import { getDepartments } from '../../actions/departments';
-import { getProductByCategoryIdList, getProductByDepartmentIdList, getAllProductList, getProductByQueryString } from '../../actions/products';
+import { getUserCart, getProductByCategoryIdList, getProductByDepartmentIdList, getAllProductList, getProductByQueryString } from '../../actions/products';
 
 
 class Home extends Component {  
@@ -33,6 +33,7 @@ class Home extends Component {
     this.props.getDepartments()
     this.props.getCategories()
     this.props.getAllProductList({limit: 8,page: 1})
+    this.props.getUserCart()
   }
 
   searchClick(query_string){
@@ -68,11 +69,14 @@ class Home extends Component {
   }
 
   render() {
+      console.log(23,this.props)
+
     const { categoriesDetails: { categories}, productsDetails , departmentsDetails: { departments } }  = this.props
+    const cart = this.props.productsDetails && this.props.productsDetails.cart
     const activePage = 0
     return (
       <div className="container-fluid">
-       <Header departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
+       <Header cart={cart} departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
        <div  className="row">
          <Sidebar categories={categories} categoryClick={this.categoryClick} activePage={activePage} />
          <ProductList productsDetails={productsDetails} />
@@ -109,5 +113,6 @@ export default Home = connect(mapStateToProps,
     getProductByCategoryIdList,
     getProductByDepartmentIdList,
     getProductByQueryString,
+    getUserCart
   })
   (Home);

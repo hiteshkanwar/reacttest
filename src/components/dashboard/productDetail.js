@@ -52,6 +52,9 @@ class ProductDetail extends Component{
            className="product-modal-box"
         >
           <div className="login-modal product-modal">
+          <div>
+                  <button onClick={this.props.closeModal}>Close Modal</button>
+                </div>
             <div className="">
               <div className="row">
                 <div className="col-md-3">
@@ -122,7 +125,7 @@ class ProductDetail extends Component{
                   </div>
                   <div className="row text-right">
                     <div className="col-md-8">
-                      <button className="btn btn-theme">Add to cart</button>
+                      <button className="btn btn-theme" onClick={this.props.addCart}>Add to cart</button>
                     </div>
                   </div>
                   <div>
@@ -132,10 +135,9 @@ class ProductDetail extends Component{
                   <div>
                     <button className="Leave-btn">Leave Review</button>
                   </div>
+
                 </div>
-                <div>
-                  <button onClick={this.props.closeModal}>Close Modal</button>
-                </div>
+                
               </div>
             </div>
           </div>
