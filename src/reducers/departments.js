@@ -11,7 +11,7 @@ const departments = (state = INITIAL_STATE, action) => {
     case actionTypes.GET_DEPARTMENTS_SUCCESS:
       return { ...state, departments: action.payload.response.data, success: true };
     case actionTypes.GET_DEPARTMENTS_ERROR:
-      return { ...state, error: action.payload.data.error };
+      return { ...state, error: action.payload.message };
     default:
       return {...state, success: false}
   }
