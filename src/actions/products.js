@@ -20,9 +20,10 @@ export  function getAllProductListError(error){
   }
 }
 
-export function getAllProductList() {
+export function getAllProductList(options) {
+
   return function (dispatch) {
-    axios.get(`${appConstants.WEB_SERVICE_URL}/products`)
+    axios.get(`${appConstants.WEB_SERVICE_URL}/products?page=${options.page}&limit=${options.limit}`)
       .then(response => {
         dispatch(getAllProductListSuccess(response))
       })
