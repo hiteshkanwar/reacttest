@@ -1,42 +1,40 @@
 import React, { Component } from 'react';
 import Pagination from "react-js-pagination";
+import { getCategories } from '../../actions/categories';
+import {connect} from 'react-redux';
 
 class Sidebar extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      pageItemsCount: 10,
-      activePage: 0
+      pageItemsCount: 7,
+      activePage: 0,
+      onClickEnable: null
     };
-    this.paginationDataMap = this.paginationDataMap.bind(this)
-    this.handlePageChange = this.handlePageChange.bind(this)
+    this.handlePageChange = this.handlePageChange.bind(this);
+    this.itemClick = this.itemClick.bind(this);
   }
- 
-  paginationDataMap(data){
-    data = Object.assign([],data)
-    const currentPage = this.state.activePage
-    const itemData = this.state.pageItemsCount
-    if(currentPage>0){
-      return data.splice(currentPage*itemData,itemData)
-    }else{
-      return data.splice(0,itemData)
-    }
+
+  itemClick(id){
+    this.setState({onClickEnable: id})
+    this.props.categoryClick(id)
   }
 
   handlePageChange(pageNumber) {
-    this.setState({activePage: (pageNumber-1)});
+    this.setState({activePage: pageNumber});
+    this.props.getCategories({limit: this.state.pageItemsCount,page: pageNumber})
   }
 
   render(){
     const { categories: { rows, count } }= this.props;
     return(
-     <div className="col-md-2">
-        <div className="sidebar">
-          <h1>Categories</h1>
+     <div className="col-md-3">
+        <div className="sidebar" id="sidebar">
           <ul>
-           { rows && this.paginationDataMap(rows).map((category, index) => (
-            <li key={index}>
-              <a href="#" onClick={() => this.props.categoryClick(category.category_id)}>{category.name}</a>
+            <p>Categories</p>
+           { (rows || []).map((category, index) => (
+            <li key={index} className= {this.state.onClickEnable==category.category_id? "active" : ""}>
+              <a href="#" onClick={() => this.itemClick(category.category_id) }>{category.name}</a>
             </li>
            ))} 
           </ul>
@@ -54,4 +52,15 @@ class Sidebar extends Component {
 
 }
 
-export default Sidebar;
+
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+
+export default Sidebar = connect(mapStateToProps,
+  {
+    getCategories
+  })
+  (Sidebar);

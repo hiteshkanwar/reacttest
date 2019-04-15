@@ -11,7 +11,7 @@ const products = (state = INITIAL_STATE, action) => {
     case actionTypes.GET_ALL_PRODUCT_LIST_SUCCESS:
       return { ...state, products: action.payload.response.data, success: true };
     case actionTypes.GET_ALL_PRODUCT_LIST_ERROR:
-      return { ...state, error: action.payload.data.error };
+      return { ...state, error: action.payload.message };
     default:
       return {...state, success: false}
   }

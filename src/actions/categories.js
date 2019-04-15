@@ -20,9 +20,9 @@ export  function getCategoriesError(error){
   }
 }
 
-export function getCategories() {
+export function getCategories(options) {
   return function (dispatch) {
-    axios.get(`${appConstants.WEB_SERVICE_URL}/categories`)
+    axios.get(`${appConstants.WEB_SERVICE_URL}/categories?page=${options.page}&limit=${options.limit}`)
       .then(response => {
         dispatch(getCategoriesSuccess(response))
       })

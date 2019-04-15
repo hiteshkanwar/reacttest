@@ -17,7 +17,6 @@ class ProductList  extends Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    //this.paginationDataMap = this.paginationDataMap.bind(this)
     this.handlePageChange = this.handlePageChange.bind(this)
   }
 
@@ -40,23 +39,11 @@ class ProductList  extends Component {
     this.props.getAllProductList({limit: this.state.pageItemsCount,page: pageNumber});
   }
 
-  // paginationDataMap(data){
-  //   data = Object.assign([],data)
-  //   const currentPage = this.state.activePage
-  //   const itemData = this.state.pageItemsCount
-  //   if(currentPage>0){
-  //     return data.splice(currentPage*itemData,itemData)
-  //   }else{
-  //     return data.splice(0,itemData)
-  //   }
-  // }
-
-
   render(){
     const { productsDetails: {products: { rows, count }} }= this.props;
     const productCount = rows && rows.length
     return ( 
-      <div className="col-md-10">
+      <div className="col-md-9">
         <div className="row">
           <div className="col-md-12">
             <Pagination
@@ -69,20 +56,21 @@ class ProductList  extends Component {
           </div>
           { (rows || []).map((product, index) => (
             <div className="col-md-3 col-sm-6 product-grid2" key={index} onClick={()=>this.handleOpenModal(product.product_id)}>
-              <div>
-               <span>{product.name}</span>
-              </div>
-              <div className="product-image2">
-                  <a href="#">
-                      <img className="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg" width="100%" /> 
-                  </a>
-              </div>
-              <div className="product-details">
-                <span> Price: ${product.price}</span>
-                <span>Discount Price: ${product.discounted_price}</span>
-              </div>
-               <div>
-               <span>{product.description}</span>
+              <div className="card">
+                <span>{product.name}</span>
+              
+                <div className="product-image2">
+                    <a href="#">
+                        <img className="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg" width="100%" /> 
+                    </a>
+                </div>
+                <div className="product-details">
+                  <span> Price: ${product.price}</span>
+                  <span>Discount Price: ${product.discounted_price}</span>
+                </div>
+                 <div>
+                 <span>{product.description}</span>
+                </div>
               </div>
             </div>
           ))} 
@@ -98,7 +86,7 @@ class ProductList  extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    productDetail:  state.productDetail
+    productDetail: state.productDetail
   }
 }
 

@@ -13,7 +13,7 @@ const Header = (props) =>{
                     <a className="nav-link" href="#" onClick={()=>props.loginClick()}>Login</a>
                   </li>
                   <li className="nav-item " >
-                    <a className="nav-link" href="#">Register</a>
+                    <a className="nav-link" href="#" onClick={()=>props.registerClick()}>Register</a>
                   </li> 
                   </ul>
                 :
@@ -44,8 +44,8 @@ const Header = (props) =>{
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
             <form className="form-inline my-2 my-lg-0">
-             <input className="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"/>
-             <button className="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+             <input className="form-control mr-sm-2" onChange={(e) => props.searchByName(e)} type="search" placeholder="Search" aria-label="Search"/>
+             <button type="button" className="btn btn-outline-success my-2 my-sm-0" onClick={() => props.searchClick(props.searchQuery)} >Search</button>
            </form>
           </ul>
        </div>

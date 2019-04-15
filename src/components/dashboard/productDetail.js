@@ -53,8 +53,15 @@ class ProductDetail extends Component{
         >
           <div className="login-modal product-modal">
             <div className="">
-              <div className="row">
-                <div className="col-md-3">
+              <div className="row text-right">
+                <div className="col-md-12">
+                  <div className="modal-header">
+                    <button className="btn btn-clos" onClick={this.props.closeModal}><i className="far fa-times-circle"></i></button>
+                  </div>
+                </div>
+              </div>
+              <div className="row product-row">
+                <div className="col-md-4">
                   <div className="">
                     <img className="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg" width="100%" height="20%" /> 
                     <hr/>
@@ -64,7 +71,7 @@ class ProductDetail extends Component{
                     </div>
                   </div>
                 </div>
-                <div className="col-md-9">
+                <div className="col-md-8">
                   <div className="">
                     <div>
                       <span className="modal-title">{this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.name}</span>
@@ -120,21 +127,21 @@ class ProductDetail extends Component{
                       })
                     }
                   </div>
-                  <div className="row text-right">
+                  <div className="row text-right mt-40">
                     <div className="col-md-8">
                       <button className="btn btn-theme">Add to cart</button>
                     </div>
                   </div>
-                  <div>
-                    <span>Leave a Review</span><br/>
-                    <textarea type="text"  name=""/>
-                  </div>
-                  <div>
-                    <button className="Leave-btn">Leave Review</button>
-                  </div>
                 </div>
-                <div>
-                  <button onClick={this.props.closeModal}>Close Modal</button>
+              </div>
+
+              <div className="row text-center leave-review">
+                <div className="col-md-12">
+                  <h4 className="review-title">Leave a Review</h4>
+                  <textarea type="text"  name="" className="form-control" />
+                  <div>
+                    <button className="Leave-btn btn btn-theme">Leave Review</button>
+                  </div>
                 </div>
               </div>
             </div>

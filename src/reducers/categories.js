@@ -11,7 +11,7 @@ const categories = (state = INITIAL_STATE, action) => {
     case actionTypes.GET_CATEGORIES_SUCCESS:
       return { ...state, categories: action.payload.response.data, success: true };
     case actionTypes.GET_CATEGORIES_ERROR:
-      return { ...state, error: action.payload.data.error };
+      return { ...state, error: action.payload.message };
     default:
       return {...state, success: false}
   }

@@ -21,7 +21,6 @@ export  function getAllProductListError(error){
 }
 
 export function getAllProductList(options) {
-
   return function (dispatch) {
     axios.get(`${appConstants.WEB_SERVICE_URL}/products?page=${options.page}&limit=${options.limit}`)
       .then(response => {
@@ -101,4 +100,33 @@ export function getProductDetailById(product_id) {
         dispatch(getProductDetailError(error.response.data.error))
       });
   };
+}
+
+export function getProductByQueryString(str) {
+  return function (dispatch) {
+    axios.get(`${appConstants.WEB_SERVICE_URL}/products/search?query_string=${str}`)
+      .then(response => {
+        dispatch(getProductByQueryStringSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(getProductByQueryStringError(error.response.data.error))
+      });
+  };
+}
+
+export function getProductByQueryStringSuccess(response){
+  return  {
+    type: actionTypes.GET_ALL_PRODUCT_LIST_SUCCESS,
+    payload: {
+        response
+    }}
+}
+
+export  function getProductByQueryStringError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.GET_ALL_PRODUCT_LIST_ERROR,
+      payload: error
+    });
+  }
 }
