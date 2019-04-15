@@ -33,3 +33,35 @@ export function login(email, password) {
   };
 }
 
+export function getRegisterSuccess(response){
+  return  {
+    type: actionTypes.GET_REGISTER_SUCCESS,
+    payload: {
+        response
+    }}
+}
+
+
+export  function getRegisterError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.GET_REGISTER_ERROR,
+      payload: error
+    });
+  }
+}
+
+
+export function register(name, email, password) {
+  return function (dispatch) {
+    axios.post(`${appConstants.WEB_SERVICE_URL}/customers`, {"name": name,"email": email,"password": password})
+      .then(response => {
+        localStorage.setItem('user',JSON.stringify(response.data));
+        dispatch(getRegisterSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(getRegisterError(error.response.data.error))
+      });
+  };
+}
+

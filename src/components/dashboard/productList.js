@@ -97,7 +97,7 @@ class ProductList  extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    productDetail:  state.productDetail
+    productDetail: state.productDetail
   }
 }
 
