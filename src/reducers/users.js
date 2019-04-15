@@ -12,6 +12,10 @@ const users = (state = INITIAL_STATE, action) => {
       return { ...state, user: action.payload.response.data, success: true, authenticated: true };
     case actionTypes.GET_LOGIN_ERROR:
       return { ...state, error: action.payload.message, authenticated: false };
+      case actionTypes.GET_REGISTER_SUCCESS:
+      return { ...state, user: action.payload.response.data, success: true, authenticated: true };
+    case actionTypes.GET_REGISTER_ERROR:
+      return { ...state, error: action.payload.message };  
     default:
       return {...state, success: false}
   }

@@ -3,7 +3,8 @@ import ReactModal from 'react-modal';
 import {connect} from 'react-redux';
 import Pagination from "react-js-pagination";
 import ProductDetail from './productDetail';
-import { addToUserCart, getProductDetailById } from '../../actions/products';
+import { addToUserCart, getProductDetailById, getAllProductList} from '../../actions/products';
+
 
 class ProductList  extends Component {
 
@@ -19,7 +20,7 @@ class ProductList  extends Component {
     this.addToCart = this. addToCart.bind(this)
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.paginationDataMap = this.paginationDataMap.bind(this)
+    //this.paginationDataMap = this.paginationDataMap.bind(this)
     this.handlePageChange = this.handlePageChange.bind(this)
   }
 
@@ -28,13 +29,12 @@ class ProductList  extends Component {
     const product_attr = this.props.productDetail.productDetail.product
     const cart_id = JSON.parse(localStorage.getItem('user'))['user']['customer_id']
     const product_id = this.props.productDetail.productDetail.product.product_id
-    console.log(12,product_attr)
     this.props.addToUserCart(cart_id, product_id, product_attr)
   }
 
   handleOpenModal(product_id) {
     this.props.getProductDetailById(product_id);
-    this.setState({ showModal: true });
+    this.setState({ showModal: true, product_id: product_id });
   }
   
   handleCloseModal(){
@@ -42,22 +42,14 @@ class ProductList  extends Component {
   }
   
   handlePageChange(pageNumber) {
-    this.setState({activePage: (pageNumber-1)});
+    this.setState({activePage: pageNumber});
+    this.props.getAllProductList({limit: this.state.pageItemsCount,page: pageNumber});
   }
 
-  paginationDataMap(data){
-    data = Object.assign([],data)
-    const currentPage = this.state.activePage
-    const itemData = this.state.pageItemsCount
-    if(currentPage>0){
-      return data.splice(currentPage*itemData,itemData)
-    }else{
-      return data.splice(0,itemData)
-    }
-  }
 
   render(){
-    const { products: { rows, count } }= this.props;
+    const rows = this.props.products && this.props.products.products && this.props.products.products.rows
+    const count = this.props.products && this.props.products.products && this.props.products.products.count
     const productCount = rows && rows.length
     return ( 
       <div className="col-md-10">
@@ -66,12 +58,12 @@ class ProductList  extends Component {
             <Pagination
               activePage={this.state.activePage}
               itemsCountPerPage={this.state.pageItemsCount}
-              totalItemsCount={productCount}
+              totalItemsCount={count}
               pageRangeDisplayed={Math.ceil((count)/this.state.pageItemsCount)}
               onChange={(e) => this.handlePageChange(e)}
             />
           </div>
-          { rows && this.paginationDataMap(rows).map((product, index) => (
+          { (rows || []).map((product, index) => (
             <div className="col-md-3 col-sm-6 product-grid2" key={index} onClick={()=>this.handleOpenModal(product.product_id)}>
               <div>
                <span>{product.name}</span>
@@ -103,7 +95,7 @@ class ProductList  extends Component {
 
 const mapStateToProps = (state) => {
   return {
-    productDetail:  state.productDetail
+    productDetail: state.productDetail
   }
 }
 
@@ -112,5 +104,7 @@ export default ProductList = connect(mapStateToProps,
   {
     addToUserCart,
     getProductDetailById,
+    getProductDetailById,
+    getAllProductList
   })
   (ProductList);
