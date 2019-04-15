@@ -1,0 +1,8 @@
+.product-details span{
+	display: inline-block;
+	background-color: #ff0000;
+	color: #fff;
+	font-size: 18px;
+	padding: 5px 15px;
+}
+.modal{ display:block; }
