@@ -106,6 +106,7 @@ class ProductDetail extends Component{
                 })
               }
             </div>
+              <button onClick={this.props.addCart}>Add Cart</button>
           </div>
           <div>
             <button onClick={this.props.closeModal}>Close Modal</button>

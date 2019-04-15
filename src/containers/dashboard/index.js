@@ -6,7 +6,7 @@ import Sidebar from '../../components/dashboard/sidebar'
 import Login from '../users/login';
 import { getCategories } from '../../actions/categories';
 import { getDepartments } from '../../actions/departments';
-import { getProductByCategoryIdList, getProductByDepartmentIdList, getAllProductList } from '../../actions/products';
+import { getProductByCategoryIdList, getProductByDepartmentIdList, getAllProductList, getUserCart } from '../../actions/products';
 
 
 class Home extends Component {  
@@ -26,7 +26,9 @@ class Home extends Component {
     this.props.getDepartments()
     this.props.getCategories()
     this.props.getAllProductList()
+    this.props.getUserCart()
   }
+
 
   categoryClick(category_id){
     this.props.getProductByCategoryIdList(category_id)
@@ -44,18 +46,20 @@ class Home extends Component {
     this.setState({login: false});
   }
 
+  
   render() {
-    const { categoriesDetails: { categories}, productsDetails: { products }, departmentsDetails: { departments } }  = this.props
+    const { categoriesDetails: { categories}, productsDetails: { cart, products }, departmentsDetails: { departments } }  = this.props
     const activePage = 0
     return (
       <div className="container-fluid">
-       <Header departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick}/>
+       <Header cart={cart} departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick}/>
        <div  className="row">
          <Sidebar categories={categories} categoryClick={this.categoryClick} activePage={activePage} />
          <ProductList products={products} />
       </div>
       <div>
-      { this.state.login === true && 
+
+      { this.state.login && this.state.login === true && 
         <Login login={this.state.login} closeLoginModal={this.closeLoginModal}/>
       }
       </div>
@@ -81,5 +85,6 @@ export default Home = connect(mapStateToProps,
     getDepartments,
     getProductByCategoryIdList,
     getProductByDepartmentIdList,
+    getUserCart
   })
   (Home);

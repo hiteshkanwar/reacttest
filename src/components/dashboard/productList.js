@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import {connect} from 'react-redux';
 import Pagination from "react-js-pagination";
 import ProductDetail from './productDetail';
-import { getProductDetailById } from '../../actions/products';
+import { addToUserCart, getProductDetailById } from '../../actions/products';
 
 class ProductList  extends Component {
 
@@ -13,17 +13,23 @@ class ProductList  extends Component {
       pageItemsCount: 8,
       activePage: 0,
       showModal: false,
-      product: []
+      product: [],
+      item: []
     };
+    this.addToCart = this. addToCart.bind(this)
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
     this.paginationDataMap = this.paginationDataMap.bind(this)
     this.handlePageChange = this.handlePageChange.bind(this)
   }
 
- 
-  componentWillReceiveProps(nextProps) {
-    this.setState({activePage:0})
+
+  addToCart(){
+    const product_attr = this.props.productDetail.productDetail.product
+    const cart_id = JSON.parse(localStorage.getItem('user'))['user']['customer_id']
+    const product_id = this.props.productDetail.productDetail.product.product_id
+    console.log(12,product_attr)
+    this.props.addToUserCart(cart_id, product_id, product_attr)
   }
 
   handleOpenModal(product_id) {
@@ -49,7 +55,6 @@ class ProductList  extends Component {
       return data.splice(0,itemData)
     }
   }
-
 
   render(){
     const { products: { rows, count } }= this.props;
@@ -86,8 +91,9 @@ class ProductList  extends Component {
             </div>
           ))} 
         </div>
-         {this.props.productDetail &&  this.props.productDetail.productDetail &&
-           <ProductDetail productDetail = {this.props.productDetail.productDetail} showModal = {this.state.showModal} closeModal={this.handleCloseModal}/>
+        {this.props.addToCart}
+         {this.props.productDetail &&  this.props.productDetail.productDetail && this.props.productDetail.productDetail.product &&
+           <ProductDetail productDetail = {this.props.productDetail.productDetail} showModal = {this.state.showModal} closeModal={this.handleCloseModal} addCart={this.addToCart}/>
          }
       </div>
     )
@@ -104,6 +110,7 @@ const mapStateToProps = (state) => {
 
 export default ProductList = connect(mapStateToProps,
   {
-    getProductDetailById
+    addToUserCart,
+    getProductDetailById,
   })
   (ProductList);

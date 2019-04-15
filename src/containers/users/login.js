@@ -15,31 +15,23 @@ class Login  extends Component {
     this.handleSubmit = this.handleSubmit.bind(this)
   }
 
+  componentWillReceiveProps(nextProps){
+    if(nextProps.user && nextProps.user.error){
+      this.setState({error: nextProps.user.error})
+    }
+  }
+
   handleSubmit(e) {
     e.preventDefault();
     const email = e.target.elements.email.value
     const password = e.target.elements.password.value
-    console.log(222,email)
-        console.log(222,password)
-    if (!email)
+    if (!email || !password)
     {
       this.setState({error: 'The email and password can not be empty' }) 
       return false
     }
-    if (!password)
-    {
-      this.setState({error: 'The email can not be empty' }) 
-      return false
-    }
     this.props.login(email, password)
-  
 
-   // const error =  this.props.handleAddOption(option)
-   //  if (error){
-   //   this.setState(() => ({
-   //    error: error
-   //   }))
-   //  }
   }
   
   render(){
@@ -63,8 +55,14 @@ class Login  extends Component {
   }
 }
 
+const mapStateToProps = (state) => {
+  return {
+    user: state.users,
+  }
+}
 
-export default Login = connect(null,
+
+export default Login = connect(mapStateToProps,
   {
     login,
   })

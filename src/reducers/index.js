@@ -10,7 +10,7 @@ const rootReducer = combineReducers({
   departments: departments,
   products: products,
   productDetail: productDetail,
-  user: users,
+  users: users,
 });
 
 export default rootReducer;

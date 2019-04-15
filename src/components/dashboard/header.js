@@ -2,7 +2,10 @@ import React, { Component } from 'react';
 
 const Header = (props) =>{
   const userLogged = (localStorage.getItem('user'))
-  console.log(222,userLogged)
+  const cartCount = props.cart && props.cart.length 
+  let totalAmout = 0
+  totalAmout = props.cart &&  props.cart.map((c)=> { return totalAmout = totalAmout +  parseInt(c.subtotal) })
+  totalAmout = totalAmout[cartCount -1]
   return (
     <div>    
       <nav className="navbar navbar-expand-md navbar-dark bg-dark">
@@ -39,6 +42,13 @@ const Header = (props) =>{
                 </li>
               ))} 
             </ul>
+        </div>
+        <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
+         <ul className="navbar-nav ml-auto">
+           <li className="nav-item " >
+              <a className="nav-link" href="#">Cart ${totalAmout} {cartCount}</a>
+            </li> 
+         </ul>
         </div>
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
