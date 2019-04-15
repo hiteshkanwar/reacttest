@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactModal from 'react-modal';
+import '../../../public/assets/css/productDetails.css';
 
 class ProductDetail extends Component{
 
@@ -29,6 +30,7 @@ class ProductDetail extends Component{
     }
   }
 
+
   onColorChange(index){
      this.setState({
          colorChecked: index
@@ -47,68 +49,95 @@ class ProductDetail extends Component{
         <ReactModal 
            isOpen={this.props.showModal}
            contentLabel="Minimal Modal Example"
+           className="product-modal-box"
         >
-          <div className="col-md-5">
-            <div className="row">
-              <img className="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg" width="100%" /> 
-            </div>
-          </div>
-          <div className="col-md-5">
-            <div className="row">
-              <div>
-                <span>{this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.name}</span>
-                <br/>
-                <div className="product-details">
-                  <span> Price: ${ this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.price}</span>
-                  <span>Discount Price: ${this.props.productDetail && this.props.productDetail.product &&  this.props.productDetail.product.discounted_price}</span>
+          <div className="login-modal product-modal">
+            <div className="">
+              <div className="row">
+                <div className="col-md-3">
+                  <div className="">
+                    <img className="pic-1" src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg" width="100%" height="20%" /> 
+                    <hr/>
+                    <div className="thumbnail">
+                      <img src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-1.jpeg" width="15%" height="15%"/>
+                      <img src="http://bestjquery.com/tutorial/product-grid/demo3/images/img-2.jpeg" width="15%" height="15%"/>
+                    </div>
+                  </div>
                 </div>
-                <br/>
-                <span>{this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.description}</span>
+                <div className="col-md-9">
+                  <div className="">
+                    <div>
+                      <span className="modal-title">{this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.name}</span>
+                      <br/>
+                      <div className="product-details">
+                        <h5 className="main-price">
+                            ${ this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.price}
+                        </h5>
+                        <h3 className="discount-price">
+                            ${this.props.productDetail && this.props.productDetail.product &&  this.props.productDetail.product.discounted_price}
+                        </h3>
+                      </div>
+                      <p className="">{this.props.productDetail && this.props.productDetail.product && this.props.productDetail.product.description}</p>
+                    </div>
+                  </div>
+                    <h4 className="color-title">Color</h4>
+                  <div>
+                    {
+
+                      this.state.colors && this.state.colors.map((option,i)=>{
+                        return  <label key={option.attribute_value_id} className="custom-radio">
+                                 <input 
+                                  type="radio" 
+                                  className="radio" 
+                                  name="color" 
+                                  checked={this.state.colorChecked == i? true: false}
+                                  key={option.attribute_value_id}
+                                  onChange={this.onColorChange.bind(this,i)} 
+                                  value={option.attribute_value_id} />
+                              {option.attribute_value}
+                              <span class="checkmark" style={{backgroundColor: option.attribute_value}}></span>
+                        </label>
+                      })
+                    }
+                  </div>
+                  <h4 className="color-title">Size</h4>
+                  <div>
+                    {
+
+                      this.state.sizes && this.state.sizes.map((option,i)=>{
+                        return <label key={option.attribute_value_id} className="custom-radio-size">
+                                 <input 
+                                  type="radio" 
+                                  className="radio1" 
+                                  name="sizes" 
+                                  checked={this.state.sizeChecked == i? true: false}
+                                  key={option.attribute_value_id}
+                                  onChange={this.onSizeChange.bind(this,i)} 
+                                  value={option.attribute_value_id} />
+                              {option.attribute_value}
+                              <span className="checkmark"></span>
+                           </label>
+                      })
+                    }
+                  </div>
+                  <div className="row text-right">
+                    <div className="col-md-8">
+                      <button className="btn btn-theme">Add to cart</button>
+                    </div>
+                  </div>
+                  <div>
+                    <span>Leave a Review</span><br/>
+                    <textarea type="text"  name=""/>
+                  </div>
+                  <div>
+                    <button className="Leave-btn">Leave Review</button>
+                  </div>
+                </div>
+                <div>
+                  <button onClick={this.props.closeModal}>Close Modal</button>
+                </div>
               </div>
             </div>
-            <br/>
-              <span>color</span>
-            <div>
-              {
-
-                this.state.colors && this.state.colors.map((option,i)=>{
-                  return <label key={option.attribute_value_id}>
-                           <input 
-                            type="radio" 
-                            className="radio" 
-                            name="color" 
-                            checked={this.state.colorChecked == i? true: false}
-                            key={option.attribute_value_id}
-                            onChange={this.onColorChange.bind(this,i)} 
-                            value={option.attribute_value_id} />
-                        {option.attribute_value}
-                     </label>
-                })
-              }
-            </div>
-            <br/>
-            <span>sizes</span>
-            <div>
-              {
-
-                this.state.sizes && this.state.sizes.map((option,i)=>{
-                  return <label key={option.attribute_value_id}>
-                           <input 
-                            type="radio" 
-                            className="radio1" 
-                            name="sizes" 
-                            checked={this.state.sizeChecked == i? true: false}
-                            key={option.attribute_value_id}
-                            onChange={this.onSizeChange.bind(this,i)} 
-                            value={option.attribute_value_id} />
-                        {option.attribute_value}
-                     </label>
-                })
-              }
-            </div>
-          </div>
-          <div>
-            <button onClick={this.props.closeModal}>Close Modal</button>
           </div>
          </ReactModal>
       </div>

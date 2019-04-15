@@ -6,3 +6,397 @@
 	padding: 5px 15px;
 }
 .modal{ display:block; }
+
+/*GLOBAL CSS HERE*/
+body {
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 15px;
+	color: #666;
+	background: #fafafa;
+}
+
+/*TOP BAR STARTS*/
+.top-bar {
+	padding: 10px 0px;
+}
+
+.top-bar .top-menu-item {
+	font-size: 16px;
+    margin: 0px;
+    color: #2e2e2d;
+    font-weight: 600;
+}
+
+.top-bar .top-menu-item a {
+	color: #fd2d5b;
+	font-weight: bold;
+}
+
+.top-bar .top-menu-item i {
+	margin-right: 10px;
+}
+
+.top-bar .navbar {
+	padding: 0px;
+}
+
+.top-bar .navbar-nav {
+	margin: 0 auto;
+}
+
+.top-bar .navbar-nav .nav-link {
+	padding: 0px 15px;
+	color: #2e2e2d;
+	font-weight: 600;
+}
+
+.top-bar .navbar-nav .nav-link:hover {
+	color: #fd2d5b;
+}
+
+.top-bar .shop-cart {
+	float: right;
+}
+/*TOP BAR ENDS*/
+
+/*HEADER STARTS*/
+.header {
+	background: #2E2E2D;
+}
+
+.header .logo {
+	max-width: 170px;
+}
+
+.header .navbar {
+	padding: 15px 0px;
+}
+
+.header .navbar-nav {
+	margin: 0 auto;
+}
+
+.header .navbar-nav li a {
+	color: #fff !important;
+	padding-right: 25px !important;
+	transition: 0.3s all ease-in;
+	-webkit-transition: 0.3s all ease-in;
+	-moz-transition: 0.3s all ease-in;
+	-o-transition: 0.3s all ease-in;
+}
+
+.header .navbar-nav li a:hover, .header .navbar-nav li.active a {
+	color: #fd2d5b !important;
+}
+
+.header .form-inline .form-control {
+	border-radius: 50px;
+	min-width: 270px;
+}
+
+.header .form-inline .btn-search {
+	background: transparent;
+	color: #fff;
+}
+/*HEADER ENDS*/
+
+/*CATEGORIES STARTS*/
+.categories-sidebar .wrapper {
+    display: flex;
+    width: 100%;
+    align-items: stretch;
+}
+
+#sidebar {
+    min-width: 200px;
+    max-width: 200px;
+    min-height: 100vh;
+    background: #fff;
+    color: #fff;
+    transition: all 0.3s;
+    padding-left: 15px;
+}
+
+#sidebar.active {
+    margin-left: -200px;
+}
+
+a[data-toggle="collapse"] {
+    position: relative;
+}
+
+.dropdown-toggle::after {
+    display: block;
+    position: absolute;
+    top: 50%;
+    right: 20px;
+    transform: translateY(-50%);
+}
+
+a, a:hover, a:focus {
+    color: inherit;
+    text-decoration: none;
+    transition: all 0.3s;
+}
+
+#sidebar ul p {
+    color: #666;
+    padding: 10px;
+    padding-left: 0px;
+    font-weight: 600;
+    font-size: 20px;
+    border-bottom: 1px solid #999;
+    max-width: 120px;
+}
+
+#sidebar ul li a {
+    padding: 10px 10px 5px 10px;
+    font-size: 1.1em;
+    display: block;
+    color: #666;
+    position: relative;
+}
+
+#sidebar ul li.active a:after {
+	content: '';
+	position: absolute;
+	min-width: 100px;
+	height: 1px;
+	background: #fd2d5b;
+	bottom: 0;
+	left: 0;
+}
+
+#sidebar ul li a:hover {
+    color: #fd2d5b;
+}
+
+#sidebar ul li.active > a, a[aria-expanded="true"] {
+    color: #fd2d5b;
+    font-weight: 600;
+}
+
+.categories-content {
+	width: 100%;
+}
+
+.categories-content .navbar-toggle {
+	display: none;
+}
+
+.categories-content .card {
+	margin-top: 15px;
+	font-family: 'Nunito Sans', sans-serif;
+	font-size: 15px;
+	color: #666;
+	padding: 1.25rem;
+	border-radius: 5px;
+	cursor: pointer;
+	margin-bottom: 15px;
+	transition: 0.2s all ease-in;
+	-webkit-transition: 0.2s all ease-in;
+	-moz-transition: 0.2s all ease-in;
+	-o-transition: 0.2s all ease-in;
+}
+
+.categories-content .card:hover {
+	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
+}
+
+.categories-content .card .card-title {
+	font-size: 24px;
+	text-align: center;
+	font-weight: 600;
+	color: #222;
+	margin-bottom: 0px;
+}
+
+.categories-content .card .price {
+	color: #fd2d5b;
+	font-size: 18px;
+	text-decoration: line-through;
+}
+
+.categories-content .card .btn {
+	padding: 6px 10px;
+    font-weight: 600;
+    font-size: 14px;
+    background: #fd2d5b;
+}
+
+.categories-content .card .card-img {
+    object-fit: contain;
+    max-height: 140px;
+    margin: 15px 0px;
+}
+
+.categories-content .card .card-body {
+	padding: 0px;
+}
+
+.categories-content .card .card-text {
+	font-size: 14px;
+	margin-top: 20px;
+}
+
+.categories-content .btn-toggle {
+	background: #fd2d5b;
+	border: none;
+}
+
+.categories-content .btn-toggle:focus {
+	box-shadow: none;
+}
+/*CATEGORIES ENDS*/
+
+/*PAGINATION STARTS*/
+.pagination-tab {
+	display: flex;
+	justify-content: center;
+	margin: 15px 0px 0px 0px;
+}
+
+.pagination-tab .pagination li a {
+	border: none;
+	color: #666;
+	cursor: pointer;
+}
+
+.pagination-tab .pagination li a:focus {
+	box-shadow: none;
+}
+
+.pagination-tab .page-item {
+	margin-right: 5px;
+}
+
+.pagination-tab .page-item.active .page-link {
+	background: #fd2d5b;
+	border-radius: 5px;
+}
+
+.pagination-tab .page-item .before {
+ 	color: #b7b7b7;
+ }
+/*PAGINATION ENDS*/
+
+/*LOGIN MODAL STARTS*/
+.login-modal.show {
+	background: rgba(0,0,0,0.7);
+	display: flex !important;
+	align-items: center;
+}
+
+.login-modal .modal-header {
+	border: none;
+	padding: 25px;
+}
+
+.login-modal .modal-header .close {
+    text-align: center;
+    color: #fd2d5b;
+    margin: 0;
+    opacity: 1;
+    padding: 0;
+    margin-left: auto;
+}
+
+.login-modal .modal-body {
+	padding: 25px;
+	padding-top: 0px;
+}
+
+.login-modal .modal-title {
+	color: #222;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.login-modal .modal-sub-title {
+	text-align: center;
+    font-size: 12px;
+    margin-bottom: 45px;
+    color: #999;
+}
+
+.login-modal .form-control {
+	border: none;
+    border-bottom: 1px solid #ccc;
+    border-radius: 0;
+    padding-left: 0;
+    text-align: center;
+    color: #222;
+}
+
+.login-modal .form-control:focus {
+	box-shadow: none;
+	border-color: #fd2d5b;
+}
+
+.login-modal .form-control::placeholder { 
+  text-align: left;
+  cursor: #999;
+}
+
+.login-modal .form-group {
+	margin-bottom: 40px;
+}
+
+.login-modal .form-group:last-child {
+	margin-bottom: 0px;
+}
+
+.login-modal .modal-content {
+	border-radius: 15px;
+}
+
+.login-modal .modal-footer {
+	display: block;
+}
+
+.login-modal .modal-footer .btn {
+	margin: 0 auto;
+	border-radius: 4px;
+	background: #fd2d5b;
+	margin-bottom: 15px;
+	text-transform: uppercase;
+}
+
+.login-modal .modal-footer p {
+	text-align: left;
+	color: #222;
+}
+
+.login-modal .modal-footer p a {
+	color: #fd2d5b;
+	font-weight: 600;
+}
+
+.login-modal {
+
+}
+/*LOGIN MODAL ENDS*/
+
+/*PRODUCT MODAL STARTS*/
+#product-modal .modal-dialog {
+	height: 90vh;
+    margin: 0 auto;
+    min-width: 800px;
+}
+
+#product-modal .modal-content {
+	height: 100%;
+}
+
+.product-modal .product-title {
+	color: #666;
+    text-align: center;
+    font-weight: 600;
+    font-size: 36px;
+}
+
+.product-modal .product-price {
+
+}
+/*PRODUCT MODAL ENDS*/

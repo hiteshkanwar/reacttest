@@ -3,7 +3,7 @@ import ReactModal from 'react-modal';
 import {connect} from 'react-redux';
 import Pagination from "react-js-pagination";
 import ProductDetail from './productDetail';
-import { getProductDetailById } from '../../actions/products';
+import { getProductDetailById,getAllProductList } from '../../actions/products';
 
 class ProductList  extends Component {
 
@@ -17,7 +17,7 @@ class ProductList  extends Component {
     };
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
-    this.paginationDataMap = this.paginationDataMap.bind(this)
+    //this.paginationDataMap = this.paginationDataMap.bind(this)
     this.handlePageChange = this.handlePageChange.bind(this)
   }
 
@@ -28,7 +28,7 @@ class ProductList  extends Component {
 
   handleOpenModal(product_id) {
     this.props.getProductDetailById(product_id);
-    this.setState({ showModal: true });
+    this.setState({ showModal: true, product_id: product_id });
   }
   
   handleCloseModal(){
@@ -36,23 +36,24 @@ class ProductList  extends Component {
   }
   
   handlePageChange(pageNumber) {
-    this.setState({activePage: (pageNumber-1)});
+    this.setState({activePage: pageNumber});
+    this.props.getAllProductList({limit: this.state.pageItemsCount,page: pageNumber});
   }
 
-  paginationDataMap(data){
-    data = Object.assign([],data)
-    const currentPage = this.state.activePage
-    const itemData = this.state.pageItemsCount
-    if(currentPage>0){
-      return data.splice(currentPage*itemData,itemData)
-    }else{
-      return data.splice(0,itemData)
-    }
-  }
+  // paginationDataMap(data){
+  //   data = Object.assign([],data)
+  //   const currentPage = this.state.activePage
+  //   const itemData = this.state.pageItemsCount
+  //   if(currentPage>0){
+  //     return data.splice(currentPage*itemData,itemData)
+  //   }else{
+  //     return data.splice(0,itemData)
+  //   }
+  // }
 
 
   render(){
-    const { products: { rows, count } }= this.props;
+    const { productsDetails: {products: { rows, count }} }= this.props;
     const productCount = rows && rows.length
     return ( 
       <div className="col-md-10">
@@ -61,12 +62,12 @@ class ProductList  extends Component {
             <Pagination
               activePage={this.state.activePage}
               itemsCountPerPage={this.state.pageItemsCount}
-              totalItemsCount={productCount}
+              totalItemsCount={count}
               pageRangeDisplayed={Math.ceil((count)/this.state.pageItemsCount)}
               onChange={(e) => this.handlePageChange(e)}
             />
           </div>
-          { rows && this.paginationDataMap(rows).map((product, index) => (
+          { (rows || []).map((product, index) => (
             <div className="col-md-3 col-sm-6 product-grid2" key={index} onClick={()=>this.handleOpenModal(product.product_id)}>
               <div>
                <span>{product.name}</span>
@@ -104,6 +105,7 @@ const mapStateToProps = (state) => {
 
 export default ProductList = connect(mapStateToProps,
   {
-    getProductDetailById
+    getProductDetailById,
+    getAllProductList
   })
   (ProductList);
