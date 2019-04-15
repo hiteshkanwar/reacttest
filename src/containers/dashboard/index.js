@@ -32,7 +32,7 @@ class Home extends Component {
   componentWillMount() {
     this.props.getDepartments()
     this.props.getCategories()
-    this.props.getAllProductList()
+    this.props.getAllProductList({limit: 8,page: 1})
   }
 
   searchClick(query_string){
@@ -68,14 +68,14 @@ class Home extends Component {
   }
 
   render() {
-    const { categoriesDetails: { categories}, productsDetails: { products }, departmentsDetails: { departments } }  = this.props
+    const { categoriesDetails: { categories}, productsDetails , departmentsDetails: { departments } }  = this.props
     const activePage = 0
     return (
       <div className="container-fluid">
        <Header departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
        <div  className="row">
          <Sidebar categories={categories} categoryClick={this.categoryClick} activePage={activePage} />
-         <ProductList products={products} />
+         <ProductList productsDetails={productsDetails} />
       </div>
       <div>
       { this.state.login === true && 

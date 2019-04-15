@@ -40,6 +40,7 @@ const Header = (props) =>{
               ))} 
             </ul>
         </div>
+
         <div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
           <ul className="navbar-nav ml-auto">
             <form className="form-inline my-2 my-lg-0">
