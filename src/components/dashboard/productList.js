@@ -5,6 +5,7 @@ import Pagination from "react-js-pagination";
 import ProductDetail from './productDetail';
 import { addToUserCart, getProductDetailById,getAllProductList,getProductByCategoryIdList } from '../../actions/products';
 
+// Component for Listing All product
 class ProductList  extends Component {
 
   constructor(props) {

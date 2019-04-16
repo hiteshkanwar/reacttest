@@ -21,9 +21,6 @@ class Registration  extends Component {
     const name = e.target.elements.name.value
     const email = e.target.elements.email.value
     const password = e.target.elements.password.value
-    console.log(222,name)
-    console.log(222,email)
-    console.log(222,password)
     if(!name)
     {
       this.setState({error: 'Name can not be empty' }) 

@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import { appConstants } from '../constants';
 import axios from 'axios';
 
-
+// Actions related to login and signup
 export function getLoginSuccess(response){
   return  {
     type: actionTypes.GET_LOGIN_SUCCESS,

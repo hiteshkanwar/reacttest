@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import Header from '../../components/dashboard/header'
 import {connect} from 'react-redux';
-import { getUserCart, emptyUserCart } from '../../actions/products';
+import { getUserCart, emptyUserCart , getCartTotal, updateUserCart} from '../../actions/products';
 import {history} from '../../routers/AppRouter';
 
 let userLogged 
@@ -14,12 +14,18 @@ class Cart  extends Component {
     }
     this.handleSubmit = this.handleSubmit.bind(this)
     this.emptyCart = this.emptyCart.bind(this)
+    this.updateCart = this.updateCart.bind(this)
   }
 
   componentWillMount() {
     userLogged = JSON.parse(localStorage.getItem('user'))['user']["customer_id"]
+    userLogged && this.props.getUserCart(userLogged)
+    userLogged && this.props.getCartTotal(userLogged)
   }
 
+  componentWillReceiveProps(nextProps){
+    
+  }
 
   handleSubmit(e) {
    
@@ -32,10 +38,16 @@ class Cart  extends Component {
   emptyCart(){
     userLogged && this.props.emptyUserCart(userLogged)
   }
+
+  updateCart(item_id, quantity){
+    userLogged && this.props.updateUserCart(item_id, quantity)
+  }
   
   render(){
     const { categoriesDetails: { categories}, productsDetails , departmentsDetails: { departments } }  = this.props
     const cart = userLogged && this.props.productsDetails && this.props.productsDetails.cart
+    const cart_total = userLogged && this.props.productsDetails && this.props.productsDetails.cart_total && this.props.productsDetails.cart_total.total_amount
+
     return(
       <div className="">
        <Header cart={cart} departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
@@ -46,8 +58,9 @@ class Cart  extends Component {
                  <div className="checkout-right">
                     <div className="table-top-section">
                       <button className="btn btn-pink" onClick={()=>this.emptyCart()}>Empty Cart</button>
-                      <div className="total-price">Total: $74.84</div>
+                      <div className="total-price">Total: {cart_total}</div>
                       <button className="btn btn-pink" onClick={()=> this.shippingPage().bind(this)}>Place Order</button>
+
                     </div>
                     <table className="timetable_sub">
                       <thead>
@@ -72,9 +85,9 @@ class Cart  extends Component {
                              <td className="invert">
                                 <div className="quantity">
                                    <div className="quantity-select">
-                                      <div className="entry value-minus">&nbsp;</div>
+                                      <div className="entry value-minus" onClick={()=>this.updateCart(product.item_id, product.quantity-1)}>&nbsp;</div>
                                       <div className="entry value"><span>{product.quantity}</span></div>
-                                      <div className="entry value-plus active">&nbsp;</div>
+                                      <div className="entry value-plus active" onClick={()=>this.updateCart(product.item_id, product.quantity+1)}>&nbsp;</div>
                                    </div>
                                 </div>
                              </td>
@@ -101,7 +114,10 @@ const mapStateToProps = (state) => {
   }
 }
  
-export default Cart = connect(mapStateToProps, 
-  {emptyUserCart} 
-)
+export default Cart = connect(mapStateToProps, {
+    getCartTotal,
+    emptyUserCart,
+    getUserCart,
+    updateUserCart
+  })
   (Cart);

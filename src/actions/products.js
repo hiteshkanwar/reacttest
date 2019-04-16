@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import { appConstants } from '../constants';
 import axios from 'axios';
 
-
+// All actions related to product
 export function getAllProductListSuccess(response){
   return  {
     type: actionTypes.GET_ALL_PRODUCT_LIST_SUCCESS,
@@ -203,37 +203,6 @@ export function addToUserCart(cart_id, product_id, attributes) {
 }
 
 
-export function updateCartSuccess(response){
-  return  {
-    type: actionTypes.UPDATE_CART_SUCCESS,
-    payload: {
-        response
-    }}
-}
-export  function updateCartError(error){
- return function(dispatch) {  
-    dispatch( {
-      type: actionTypes.UPDATE_CART_ERROR,
-      payload: error
-    });
-  }
-}
-
-export function updateUserCart(item_id, quantity) {
-  return function (dispatch) {
-    axios.put(`${appConstants.WEB_SERVICE_URL}/shoppingcart/update/{item_id}`, {"item_id": item_id, "quantity": quantity})
-      .then(response => {
-        dispatch(updateCartSuccess(response))
-      })
-      .catch(error=> {
-        dispatch(updateCartError(error.message))
-      });
-  };
-}
-
-
-
-
 export function getCartSuccess(response){
   return  {
     type: actionTypes.GET_CART_SUCCESS,
@@ -252,8 +221,6 @@ export  function getCartError(error){
 
 
 export function getUserCart(cart_id) {
-    console.log(33333, cart_id)
-
   return function (dispatch) {
     axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/${cart_id}`)
       .then(response => {
@@ -268,7 +235,7 @@ export function getUserCart(cart_id) {
 
 export function emptyUserCartSuccess(response){
   return  {
-    type: actionTypes.EMPTY_USER_CART_SUCCESS,
+    type: actionTypes.GET_CART_SUCCESS,
     payload: {
         response
     }}
@@ -276,7 +243,7 @@ export function emptyUserCartSuccess(response){
 export  function emptyUserCartError(error){
  return function(dispatch) {  
     dispatch( {
-      type: actionTypes.EMPTY_USER_CART_SUCCESS,
+      type: actionTypes.GET_CART_ERROR,
       payload: error
     });
   }
@@ -285,12 +252,71 @@ export  function emptyUserCartError(error){
 
 export function emptyUserCart(cart_id) {
   return function (dispatch) {
-    axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/empty/${cart_id}`)
+    axios.delete(`${appConstants.WEB_SERVICE_URL}/shoppingcart/empty/${cart_id}`)
       .then(response => {
         dispatch(emptyUserCartSuccess(response))
       })
       .catch(error=> {
         dispatch(emptyUserCartError(error.message))
+      });
+  };
+}
+
+export function getCartTotalSuccess(response){
+  return  {
+    type: actionTypes.GET_CART_TOTAL_SUCCESS,
+    payload: {
+        response
+    }}
+}
+export  function getCartTotalError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.GET_CART_TOTAL_ERROR,
+      payload: error
+    });
+  }
+}
+
+export function getCartTotal(cart_id) {
+  return function (dispatch) {
+    axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/totalAmount/${cart_id}`)
+      .then(response => {
+        
+        dispatch(getCartTotalSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(getCartTotalError(error.message))
+      });
+  };
+}
+
+
+export function updateUserCartSuccess(response){
+  return  {
+    type: actionTypes.UPDATE_CART_SUCCESS,
+    payload: {
+        response
+    }}
+  }  
+
+export  function updateUserCartError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.UPDATE_CART_ERROR,
+      payload: error
+    });
+  }
+}
+
+export function updateUserCart(item_id, quantity) {
+  return function (dispatch) {
+    axios.put(`${appConstants.WEB_SERVICE_URL}/shoppingcart/update/${item_id}`, {"item_id": item_id, "quantity": quantity})
+      .then(response => {
+        dispatch(updateUserCartSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(updateUserCartError(error.message))
       });
   };
 }

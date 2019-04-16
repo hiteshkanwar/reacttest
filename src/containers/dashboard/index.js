@@ -85,9 +85,6 @@ class Home extends Component {
     totalAmout = cart ? totalAmout[cartCount -1] : 0
     return (
       <div className="">
-        <div className="container-fluid">
-         
-        </div>
        <Header cart={cart} departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
         <div  className="">
           <Sidebar categories={categories} categoryClick={this.categoryClick} activePage={activePage} />

@@ -4,6 +4,7 @@ import {connect} from 'react-redux';
 import '../../../public/assets/css/productDetails.css';
 import { review } from '../../actions/products';
 
+// Component for Specific product
 
 class ProductDetail extends Component{
 

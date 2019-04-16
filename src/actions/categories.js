@@ -2,7 +2,7 @@ import * as actionTypes from './actionTypes';
 import { appConstants } from '../constants';
 import axios from 'axios';
 
-
+// Actions related to category
 export function getCategoriesSuccess(response){
   return  {
     type: actionTypes.GET_CATEGORIES_SUCCESS,
