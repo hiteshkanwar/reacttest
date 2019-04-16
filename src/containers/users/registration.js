@@ -44,7 +44,6 @@ class Registration  extends Component {
   }
   
   render(){
-    console.log(44,this.props)
     return(
         <div className="container-fluid">
         <ReactModal 

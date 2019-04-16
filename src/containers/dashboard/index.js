@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux';
+import {Link} from 'react-router-dom';
 import Header from '../../components/dashboard/header'
 import ProductList from '../../components/dashboard/productList'
 import Sidebar from '../../components/dashboard/sidebar'
@@ -10,6 +11,7 @@ import { getCategories } from '../../actions/categories';
 import { getDepartments } from '../../actions/departments';
 import { getUserCart, getProductByCategoryIdList, getProductByDepartmentIdList, getAllProductList, getProductByQueryString } from '../../actions/products';
 
+let userLogged;
 
 class Home extends Component {  
 
@@ -34,7 +36,8 @@ class Home extends Component {
     this.props.getDepartments()
     this.props.getCategories({limit: 7, page: 1})
     this.props.getAllProductList({limit: 8,page: 1})
-    this.props.getUserCart()
+    userLogged = JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user'))['user']["customer_id"]
+    userLogged && this.props.getUserCart(userLogged)
   }
 
   searchClick(query_string){
@@ -71,15 +74,14 @@ class Home extends Component {
 
   render() {
     const userLogged = (localStorage.getItem('user'))
-      console.log(23,this.props)
-
     const { categoriesDetails: { categories}, productsDetails , departmentsDetails: { departments } }  = this.props
-    const cart = this.props.productsDetails && this.props.productsDetails.cart
+    const cart = userLogged && this.props.productsDetails && this.props.productsDetails.cart
+
     const activePage = 0
     const cartCount = cart && cart.length 
     let totalAmout = 0
     totalAmout = cart &&  cart.map((c)=> { return totalAmout = totalAmout +  parseInt(c.subtotal) })
-    totalAmout = totalAmout[cartCount -1]
+    totalAmout = cart ? totalAmout[cartCount -1] : 0
     return (
       <div className="">
         <div className="container-fluid">
@@ -130,7 +132,7 @@ class Home extends Component {
                 <div className="shop-cart">
                   <h4 className="top-menu-item">
                     <i class="fas fa-shopping-bag"></i> Your Bag:
-                    <a className="" href="#"> ${totalAmout} {cartCount}</a>
+                    <Link className="nav-link" to="/cart">${totalAmout} {cartCount}</Link>
                   </h4>
                 </div>
               </div>

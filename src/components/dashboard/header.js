@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
+import {Link} from 'react-router-dom';
+let totalAmout
 
 const Header = (props) =>{
-  // const userLogged = (localStorage.getItem('user'))
-  // const cartCount = props.cart && props.cart.length 
-  // let totalAmout = 0
-  // totalAmout = props.cart &&  props.cart.map((c)=> { return totalAmout = totalAmout +  parseInt(c.subtotal) })
-  // totalAmout = totalAmout[cartCount -1]
+  const userLogged = (localStorage.getItem('user'))
+  const cartCount = props.cart && props.cart.length 
+  totalAmout = 0
+  totalAmout = props.cart &&  props.cart.map((c)=> { return totalAmout = totalAmout +  parseInt(c.subtotal) })
+  totalAmout =  props.cart ?  totalAmout[cartCount -1] : 0
   return (
     
     <header className="container-fluid header">    
@@ -54,7 +56,7 @@ const Header = (props) =>{
         {/*<div className="navbar-collapse collapse w-100 order-3 dual-collapse2">
          <ul className="navbar-nav ml-auto">
            <li className="nav-item " >
-              <a className="nav-link" href="#">Cart ${totalAmout} {cartCount}</a>
+              <Link className="nav-link" to="/cart">Cart ${totalAmout} {cartCount}</Link>
             </li> 
          </ul>
         </div>*/}

@@ -18,6 +18,7 @@ export const store = createStore(
   composeEnhancers(applyMiddleware(historyMiddleware, thunk))
 );
 
+
 ReactDOM.render(
     <Provider store={store}>
         <AppRouter />

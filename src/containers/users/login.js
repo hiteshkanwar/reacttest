@@ -31,6 +31,7 @@ class Login  extends Component {
       this.setState({error: 'The email can not be empty' }) 
       return false
     }
+    debugger
     this.props.login(email, password)
   
 
@@ -43,7 +44,6 @@ class Login  extends Component {
   }
   
   render(){
-    console.log(44,this.props)
     return(
       <div className="container-fluid">
         <ReactModal 
@@ -68,12 +68,13 @@ class Login  extends Component {
                 <div className="form-group">
                   <input type="password" placeholder="Password *" name="password" className='add-option-input form-control'/>
                 </div>
+                <div className="modal-footer text-center">
+                  <button type="submit" className='button btn btn-danger'>Sign In</button> 
+                  <p>Don't have an account? <a href="#">Register</a></p>
+                </div>
               </form>
             </div>
-            <div className="modal-footer text-center">
-              <button type="submit" className='button btn btn-danger'>Sign In</button> 
-              <p>Don't have an account? <a href="#">Register</a></p>
-            </div>
+
           </div>
         </ReactModal>
       </div>

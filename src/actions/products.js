@@ -36,10 +36,44 @@ export function getAllProductList(options) {
         dispatch(getAllProductListSuccess(response))
       })
       .catch(error=> {
-        dispatch(getAllProductListError(error.response.data.error))
+        dispatch(getAllProductListError(error.message))
       });
   };
 }
+
+export function reviewSuccess(response){
+  return  {
+    type: actionTypes.GET_REVIEW_SUCCESS,
+    payload: {
+        response
+    }}
+}
+
+export  function reviewError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.GET_REVIEW_ERROR,
+      payload: error
+    });
+  }
+}
+
+export function review(product_id, review, rating, access_token) {
+  return function (dispatch) {
+    var headers = {
+      'user-key': access_token
+    }
+    axios.post(`${appConstants.WEB_SERVICE_URL}/products/${product_id}/reviews`, {"product_id": product_id,"review": review, "rating": rating}, {headers: headers})
+      .then(response => {
+        dispatch(reviewSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(reviewError(error.message))
+      });
+  };
+}
+
+
 
 export function getProductByCategoryIdList(category_id) {
   return function (dispatch) {
@@ -48,7 +82,7 @@ export function getProductByCategoryIdList(category_id) {
         dispatch(getAllProductsCategoriesSuccess(response,category_id))
       })
       .catch(error=> {
-        dispatch(getAllProductListError(error.response.data.error))
+        dispatch(getAllProductListError(error.message))
       });
   };
 }
@@ -61,7 +95,7 @@ export function getProductByDepartmentIdList(department_id) {
         dispatch(getAllProductListSuccess(response))
       })
       .catch(error=> {
-        dispatch(getAllProductListError(error.response.data.error))
+        dispatch(getAllProductListError(error.message))
       });
   };
 }
@@ -101,12 +135,12 @@ export function getProductDetailById(product_id) {
                 dispatch(getProductDetailSuccess(finalResponse))
              })
              .catch(error=> {
-               dispatch(getProductDetailError(error.response.data.error))
+               dispatch(getProductDetailError(error.message))
              })
         }
       })
       .catch(error=> {
-        dispatch(getProductDetailError(error.response.data.error))
+        dispatch(getProductDetailError(error.message))
       });
   };
 }
@@ -118,7 +152,7 @@ export function getProductByQueryString(str) {
         dispatch(getProductByQueryStringSuccess(response))
       })
       .catch(error=> {
-        dispatch(getProductByQueryStringError(error.response.data.error))
+        dispatch(getProductByQueryStringError(error.message))
       });
   };
 }
@@ -169,6 +203,37 @@ export function addToUserCart(cart_id, product_id, attributes) {
 }
 
 
+export function updateCartSuccess(response){
+  return  {
+    type: actionTypes.UPDATE_CART_SUCCESS,
+    payload: {
+        response
+    }}
+}
+export  function updateCartError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.UPDATE_CART_ERROR,
+      payload: error
+    });
+  }
+}
+
+export function updateUserCart(item_id, quantity) {
+  return function (dispatch) {
+    axios.put(`${appConstants.WEB_SERVICE_URL}/shoppingcart/update/{item_id}`, {"item_id": item_id, "quantity": quantity})
+      .then(response => {
+        dispatch(updateCartSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(updateCartError(error.message))
+      });
+  };
+}
+
+
+
+
 export function getCartSuccess(response){
   return  {
     type: actionTypes.GET_CART_SUCCESS,
@@ -186,9 +251,11 @@ export  function getCartError(error){
 }
 
 
-export function getUserCart() {
+export function getUserCart(cart_id) {
+    console.log(33333, cart_id)
+
   return function (dispatch) {
-    axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/508`)
+    axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/${cart_id}`)
       .then(response => {
         dispatch(getCartSuccess(response))
       })
@@ -197,3 +264,34 @@ export function getUserCart() {
       });
   };
 }
+
+
+export function emptyUserCartSuccess(response){
+  return  {
+    type: actionTypes.EMPTY_USER_CART_SUCCESS,
+    payload: {
+        response
+    }}
+}
+export  function emptyUserCartError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.EMPTY_USER_CART_SUCCESS,
+      payload: error
+    });
+  }
+}
+
+
+export function emptyUserCart(cart_id) {
+  return function (dispatch) {
+    axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/empty/${cart_id}`)
+      .then(response => {
+        dispatch(emptyUserCartSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(emptyUserCartError(error.message))
+      });
+  };
+}
+

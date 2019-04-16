@@ -27,7 +27,7 @@ export function getCategories(options) {
         dispatch(getCategoriesSuccess(response))
       })
       .catch(error=> {
-        dispatch(getCategoriesError(error.response.data.error))
+        dispatch(getCategoriesError(error.message))
       });
   };
 }

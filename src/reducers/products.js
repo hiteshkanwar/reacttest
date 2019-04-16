@@ -20,10 +20,18 @@ const products = (state = INITIAL_STATE, action) => {
       return { ...state, cart: action.payload.response.data, success: true };
     case actionTypes.ADD_CART_ERROR:
       return { ...state, error: action.payload.message };
+    case actionTypes.UPDATE_CART_SUCCESS:
+      return { ...state, cart: action.payload.response.data, success: true };
+    case actionTypes.UPDATE_CART_ERROR:
+      return { ...state, error: action.payload.message };
     case actionTypes.GET_CART_SUCCESS:
       return { ...state, cart: action.payload.response.data, success: true };
     case actionTypes.GET_CART_ERROR:
       return { ...state, error: action.payload.message };
+    case actionTypes.GET_REVIEW_SUCCESS:
+      return { ...state, cart: action.payload.response.data, success: true };
+    case actionTypes.GET_REVIEW_ERROR:
+      return { ...state, error: action.payload.message };  
     default:
       return {...state, success: false}
   }

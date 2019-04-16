@@ -27,7 +27,7 @@ export function getDepartments() {
         dispatch(getDepartmentsSuccess(response))
       })
       .catch(error=> {
-        dispatch(getDepartmentsError(error.response.data.error))
+        dispatch(getDepartmentsError(error.message))
       });
   };
 }

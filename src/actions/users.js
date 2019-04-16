@@ -21,14 +21,16 @@ export  function getLoginError(error){
 }
 
 export function login(email, password) {
+  debugger
   return function (dispatch) {
     axios.post(`${appConstants.WEB_SERVICE_URL}/customers/login`, {"email": email,"password": password})
       .then(response => {
+        debugger
       	localStorage.setItem('user',JSON.stringify(response.data));
         dispatch(getLoginSuccess(response))
       })
       .catch(error=> {
-        dispatch(getLoginError(error.response.data.error))
+        dispatch(getLoginError(error.message))
       });
   };
 }
@@ -60,7 +62,7 @@ export function register(name, email, password) {
         dispatch(getRegisterSuccess(response))
       })
       .catch(error=> {
-        dispatch(getRegisterError(error.response.data.error))
+        dispatch(getRegisterError(error.message))
       });
   };
 }
