@@ -2,7 +2,8 @@ import React, { Component } from 'react';
 import ReactModal from 'react-modal';
 import Header from '../../components/dashboard/header'
 import {connect} from 'react-redux';
-import { getUserCart } from '../../actions/products';
+import { getUserCart, emptyUserCart } from '../../actions/products';
+import {history} from '../../routers/AppRouter';
 
 let userLogged 
 class Cart  extends Component {
@@ -24,8 +25,11 @@ class Cart  extends Component {
    
   }
 
+  shippingPage(){
+    history.push('/shipping')
+  }
+
   emptyCart(){
-    debugger
     userLogged && this.props.emptyUserCart(userLogged)
   }
   
@@ -33,7 +37,7 @@ class Cart  extends Component {
     const { categoriesDetails: { categories}, productsDetails , departmentsDetails: { departments } }  = this.props
     const cart = userLogged && this.props.productsDetails && this.props.productsDetails.cart
     return(
-      <div className="container-fluid">
+      <div className="">
        <Header cart={cart} departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
        <section className="checkout py-lg-4 py-md-3 py-sm-3 py-3">
           <div className="container py-lg-5 py-md-4 py-sm-4 py-3">
@@ -43,7 +47,7 @@ class Cart  extends Component {
                     <div className="table-top-section">
                       <button className="btn btn-pink" onClick={()=>this.emptyCart()}>Empty Cart</button>
                       <div className="total-price">Total: $74.84</div>
-                      <button className="btn btn-pink">Place Order</button>
+                      <button className="btn btn-pink" onClick={()=> this.shippingPage().bind(this)}>Place Order</button>
                     </div>
                     <table className="timetable_sub">
                       <thead>
@@ -98,6 +102,6 @@ const mapStateToProps = (state) => {
 }
  
 export default Cart = connect(mapStateToProps, 
-  emptyUserCart 
+  {emptyUserCart} 
 )
   (Cart);

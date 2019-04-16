@@ -81,7 +81,7 @@
 	color: #333;
 	font-weight: 600;
 	font-size: 18px;
-	margin: 20px 0px 0px 0px;
+	margin: 20px 0px 10px 0px;
 }
 
 .product-modal .leave-review {
@@ -172,7 +172,7 @@
   padding-left: 35px;
   margin-bottom: 12px;
   cursor: pointer;
-  font-size: 0px;
+  font-size: 14px;
   -webkit-user-select: none;
   -moz-user-select: none;
   -ms-user-select: none;
@@ -234,6 +234,60 @@
     background: #fd2d5b !important;
     border-radius: 50px !important;
     color: #fff !important;
+}
+
+/*CUSTOM SIZE RADIO*/
+/*.size-radio-label {
+  display: inline-block;
+  min-width: 35px;
+  height: 30px;
+  line-height: 25px;
+  font-size: 14px;
+  padding: 0px 5px;
+  text-align: center;
+  border: solid 2px #fd2d5b;
+  transition: all 0.3s;
+  background: transparent;
+  margin-right: 15px;
+  color: #222;
+  cursor: pointer;
+}
+
+.size-radio[type="radio"] {
+  display: none;
+}
+
+.size-radio[type="radio"]:checked , .size-radio-label {
+  border: solid 2px #fd2d5b;
+  background: #fd2d5b;
+}*/
+
+.size-radio label {
+    float:left;
+    min-width: 35px;
+    margin-right: 10px;
+    background-color: #fff;
+    border:1px solid #fd2d5b;
+    line-height: 25px;
+    font-size: 14px;
+       
+}
+
+.size-radio label span {
+    text-align: center;
+    font-size: 14px;
+    display: block;
+    color: #fd2d5b;
+    font-weight: bold;
+}
+
+.size-radio label input {
+    display: none;
+}
+
+.size-radio input:checked + span {
+    background-color: #fd2d5b;
+    color: #fff;
 }
 
 @media (min-width: 576px) {

@@ -31,7 +31,6 @@ class Login  extends Component {
       this.setState({error: 'The email can not be empty' }) 
       return false
     }
-    debugger
     this.props.login(email, password)
   
 

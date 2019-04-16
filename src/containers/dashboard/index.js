@@ -74,6 +74,7 @@ class Home extends Component {
 
   render() {
     const userLogged = (localStorage.getItem('user'))
+    const userName = JSON.parse(localStorage.getItem('user')) && JSON.parse(localStorage.getItem('user')).user.name
     const { categoriesDetails: { categories}, productsDetails , departmentsDetails: { departments } }  = this.props
     const cart = userLogged && this.props.productsDetails && this.props.productsDetails.cart
 
@@ -85,59 +86,7 @@ class Home extends Component {
     return (
       <div className="">
         <div className="container-fluid">
-          <div className="top-bar">
-            <div className="row">
-              <div className="col-md-3">
-                <div className="user-login">
-                  {!userLogged ?
-                    <h4 className="top-menu-item">
-                      Hi! <a className="" href="#" onClick={()=>this.loginClick()}>Login</a>
-                      or <a className="" href="#" onClick={()=>this.registerClick()}>Register</a>
-                    </h4>
-                    /*<ul className="navbar-nav mr-auto">
-                      <li className="nav-item active" >
-                        <a className="nav-link" href="#" onClick={()=>this.loginClick()}>Login</a>
-                      </li>
-                      <li className="nav-item " >
-                        <a className="nav-link" href="#" onClick={()=>this.registerClick()}>Register</a>
-                      </li> 
-                    </ul>*/
-                    :
-                    <ul className="navbar-nav">
-                      <li className="nav-item active" >
-                        <a className="nav-link" href="#">My Bag</a>
-                      </li>
-                      <li className="nav-item " >
-                        <a className="nav-link" href="#">My Profile</a>
-                      </li> 
-                      <li className="nav-item " >
-                        <a className="nav-link" href="#">Logout</a>
-                      </li> 
-                    </ul>
-                  }  
-                </div>
-              </div>
-              <div className="col-md-6">
-                <div className="navbar navbar-expand-lg">
-                  <ul className="navbar-nav ml-auto text-center">
-                    { departments && departments.map((department, index) => (
-                      <li className="nav-item active" key={index}>
-                        <a className="nav-link" href="#"  onClick={() => this.departmentClick(department.department_id)}>{department.name}</a>
-                      </li>
-                    ))} 
-                  </ul>
-                </div>
-              </div>
-              <div className="col-md-3">
-                <div className="shop-cart">
-                  <h4 className="top-menu-item">
-                    <i class="fas fa-shopping-bag"></i> Your Bag:
-                    <Link className="nav-link" to="/cart">${totalAmout} {cartCount}</Link>
-                  </h4>
-                </div>
-              </div>
-            </div>
-          </div>
+         
         </div>
        <Header cart={cart} departments={departments} departmentClick={this.departmentClick} loginClick={this.loginClick} registerClick={this.registerClick} searchClick={this.searchClick} searchByName={this.searchByName} searchQuery={this.state.searchQuery}/>
         <div  className="">

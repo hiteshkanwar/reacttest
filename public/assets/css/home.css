@@ -41,6 +41,26 @@
 .top-bar .shop-cart {
 	float: right;
 }
+
+.user-login .user-login-dropdown {
+	width: 60%;
+}
+
+.user-login .user-login-dropdown .dropdown-menu {
+	
+}
+
+.user-login .user-login-dropdown .dropdown-item {
+	border-bottom: 2px solid #fff;
+	color: #111;
+	font-weight: 600;
+	transition: 0.3s all ease-in;
+}
+
+.user-login .user-login-dropdown .dropdown-item:hover {
+	border-bottom: 2px solid #fd2d5b;
+	background: none;
+}
 /*TOP BAR ENDS*/
 
 /*HEADER STARTS*/

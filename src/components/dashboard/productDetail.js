@@ -68,7 +68,6 @@ class ProductDetail extends Component{
   }
 
   render(){
-    console.log(2111,this.props)
     return (
       <div className="container-fluid">
         <ReactModal 
@@ -136,27 +135,26 @@ class ProductDetail extends Component{
                     }
                   </div>
                   <h4 className="color-title">Size</h4>
-                  <div>
+                  <div className='size-radio'>
                     {
 
                       this.state.sizes && this.state.sizes.map((option,i)=>{
-                        return <label key={option.attribute_value_id} className="custom-radio-size">
+                        return <label key={option.attribute_value_id}>
                                  <input 
                                   type="radio" 
-                                  className="radio1" 
                                   name="sizes" 
                                   checked={this.state.sizeChecked == i? true: false}
                                   key={option.attribute_value_id}
                                   onChange={this.onSizeChange.bind(this,i)} 
                                   value={option.attribute_value_id} />
-                              {option.attribute_value}
-                              <span className="checkmark"></span>
-                           </label>
+                                <span>{option.attribute_value}</span>
+                            </label>
                       })
                     }
                   </div>
-                  <div className="row text-right mt-40">
-                    <div className="col-md-8">
+
+                  <div className="text-right mt-40">
+                    <div className="col-md-9">
                       <button className="btn btn-theme" onClick={this.props.addCart}>Add to cart</button>
                     </div>
                   </div>
