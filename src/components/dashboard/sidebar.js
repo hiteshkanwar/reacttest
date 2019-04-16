@@ -28,7 +28,7 @@ class Sidebar extends Component {
   render(){
     const { categories: { rows, count } }= this.props;
     return(
-     <div className="col-md-3">
+     <div className="col-md-2 col-sm-3">
         <div className="sidebar" id="sidebar">
           <ul>
             <p>Categories</p>
@@ -45,6 +45,8 @@ class Sidebar extends Component {
           totalItemsCount={count}
           pageRangeDisplayed={Math.ceil((count)/this.state.pageItemsCount)}
           onChange={(e) => this.handlePageChange(e)}
+          firstPageText={false}
+          lastPageText ={false}
         />
       </div>
       )

@@ -45,18 +45,36 @@ class Login  extends Component {
   render(){
     console.log(44,this.props)
     return(
-        <div className="container-fluid">
+      <div className="container-fluid">
         <ReactModal 
-           isOpen={this.props.login}
-           contentLabel="Minimal Modal Example"
-        >
-         <button onClick={this.props.closeLoginModal}>Close Modal</button>
-          <form className='user' onSubmit={this.handleSubmit}>
-          { this.state.error && <p className='add-option-error'> {this.state.error} </p>}
-           <input type="text" name="email" className='add-option-input'/>
-           <input type="password" name="password" className='add-option-input'/>
-           <button className='button'>Sign In</button> 
-         </form>
+          isOpen={this.props.login}
+          contentLabel="Minimal Modal Example"
+          className="modal-dialog"
+          >
+          <div className="modal-content login-modal">
+            <div className="modal-header">
+              <button className="close" onClick={this.props.closeLoginModal}>
+                <i class="far fa-times-circle"></i>
+              </button>
+            </div>
+            <div className="modal-body">
+              <h4 className="modal-title">Sign in</h4>
+              <h6 className="modal-sub-title">* All Fields Are Required</h6>
+              <form className='user' onSubmit={this.handleSubmit}>
+                { this.state.error && <p className='add-option-error'> {this.state.error} </p>}
+                <div className="form-group">
+                  <input type="text" name="email" placeholder="Email *" className='add-option-input form-control'/>
+                </div>
+                <div className="form-group">
+                  <input type="password" placeholder="Password *" name="password" className='add-option-input form-control'/>
+                </div>
+              </form>
+            </div>
+            <div className="modal-footer text-center">
+              <button type="submit" className='button btn btn-danger'>Sign In</button> 
+              <p>Don't have an account? <a href="#">Register</a></p>
+            </div>
+          </div>
         </ReactModal>
       </div>
     )

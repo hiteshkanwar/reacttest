@@ -1,13 +1,19 @@
 .product-modal {
-
+  height: 100%;
 }
 
 .product-modal-box {
-    height: 100vh;
+    height: 100%;
+    overflow: scroll;
+    overflow-x: auto;
     margin: 0 auto;
     min-width: 800px !important;
     background: #fff;
-    border-radius: 15px;
+    border-radius: 0px;
+}
+
+.product-modal .Leave-btn {
+  margin-bottom: 30px;
 }
 
 .product-modal {
@@ -33,10 +39,10 @@
 }
 
 .ReactModal__Overlay.ReactModal__Overlay--after-open {
-	background-color: rgba(0,0,0,0.7) !important;
-    display: flex !important;
-    align-items: center;
-    padding: 25px;
+	background-color: rgba(0,0,0,0.8) !important;
+  display: flex !important;
+  align-items: center;
+  padding: 0px;
 }
 
 .product-modal .thumbnail {
@@ -62,7 +68,8 @@
 	color: #fd2d5b;
 	font-size: 15px;
 	margin-right: 20px;
-    font-weight: 600;
+  font-weight: 600;
+  text-decoration: line-through;
 }
 
 .product-modal .product-details .discount-price {
@@ -92,6 +99,10 @@
   margin: 10px auto;
   min-height: 90px;
   border: 1px solid #ccc;
+}
+
+.modal-footer {
+  border-top: none !important;
 }
 
 /*Custom Radio Button*/
@@ -233,7 +244,5 @@
 }
 
 @media (max-width: 576px) {
-  .product-modal {
-    
-  }
+  
 }

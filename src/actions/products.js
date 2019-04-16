@@ -11,6 +11,15 @@ export function getAllProductListSuccess(response){
     }}
 }
 
+export function getAllProductsCategoriesSuccess(response,category_id){
+  return  {
+    type: actionTypes.GET_ALL_PRODUCT_LIST_CAT_SUCCESS,
+    payload: {
+        response: response,
+        category_id: category_id
+    }}
+}
+
 export  function getAllProductListError(error){
  return function(dispatch) {  
     dispatch( {
@@ -36,7 +45,7 @@ export function getProductByCategoryIdList(category_id) {
   return function (dispatch) {
     axios.get(`${appConstants.WEB_SERVICE_URL}/products/inCategory/${category_id}`)
       .then(response => {
-        dispatch(getAllProductListSuccess(response))
+        dispatch(getAllProductsCategoriesSuccess(response,category_id))
       })
       .catch(error=> {
         dispatch(getAllProductListError(error.response.data.error))
@@ -129,4 +138,62 @@ export  function getProductByQueryStringError(error){
       payload: error
     });
   }
+}
+
+export function addCartSuccess(response){
+  return  {
+    type: actionTypes.ADD_CART_SUCCESS,
+    payload: {
+        response
+    }}
+}
+export  function addCartError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.ADD_CART_ERROR,
+      payload: error
+    });
+  }
+}
+
+export function addToUserCart(cart_id, product_id, attributes) {
+  return function (dispatch) {
+    axios.post(`${appConstants.WEB_SERVICE_URL}/shoppingcart/add`, {"cart_id": cart_id.toString(), "product_id": product_id, "attributes": JSON.stringify(attributes)})
+      .then(response => {
+        dispatch(addCartSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(addCartError(error.message))
+      });
+  };
+}
+
+
+export function getCartSuccess(response){
+  return  {
+    type: actionTypes.GET_CART_SUCCESS,
+    payload: {
+        response
+    }}
+}
+export  function getCartError(error){
+ return function(dispatch) {  
+    dispatch( {
+      type: actionTypes.GET_CART_ERROR,
+      payload: error
+    });
+  }
+}
+
+
+export function getUserCart() {
+  return function (dispatch) {
+    axios.get(`${appConstants.WEB_SERVICE_URL}/shoppingcart/508`)
+      .then(response => {
+        dispatch(getCartSuccess(response))
+      })
+      .catch(error=> {
+        dispatch(getCartError(error.message))
+      });
+  };
 }

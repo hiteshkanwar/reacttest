@@ -50,15 +50,42 @@ class Registration  extends Component {
         <ReactModal 
            isOpen={this.props.register}
            contentLabel="Minimal Modal Example"
+           className="modal-dialog"
         >
-         <button onClick={this.props.closeRegisterModal}>Close Modal</button>
-          <form className='user' onSubmit={this.handleSubmit}>
-          { this.state.error && <p className='add-option-error'> {this.state.error} </p>}
-           <input type="text" name="name" className='add-option-input'/>
-           <input type="text" name="email" className='add-option-input'/>
-           <input type="password" name="password" className='add-option-input'/>
-           <button className='button'>Sign Up</button> 
-         </form>
+
+        <div className="modal-content login-modal">
+          <div className="modal-header">
+            <button className="close" onClick={this.props.closeRegisterModal}>
+              <i class="far fa-times-circle"></i>
+            </button>
+          </div>
+
+          <div className="modal-body">
+            <h4 class="modal-title">Register</h4>
+            <h6 class="modal-sub-title">* All Fields Are Required</h6>
+            <form className='user' onSubmit={this.handleSubmit}>
+              { this.state.error && <p className='add-option-error'> {this.state.error} </p>}
+              <div className="form-group">
+                <input type="text" name="name" className='add-option-input form-control' placeholder="Name *"/>
+              </div>
+              <div className="form-group">
+                <input type="text" placeholder="Email *" name="email" className='add-option-input form-control'/>
+              </div>
+              <div className="row">
+                <div className="form-group col-sm-6 mb-0">
+                  <input type="password" placeholder="Password *" name="password" className='add-option-input form-control'/>
+                </div>
+                <div className="form-group col-sm-6">
+                  <input type="password" placeholder="Confirm Password" name="password" className='add-option-input form-control'/>
+                </div>
+              </div>
+            </form>
+          </div>
+          <div className="modal-footer text-center">
+            <button className='button btn btn-danger'>Sign Up</button>
+            <p>Already have an account? <a href="#">Login</a></p>
+          </div>
+        </div>
         </ReactModal>
       </div>
     )

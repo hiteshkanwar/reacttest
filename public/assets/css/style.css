@@ -15,240 +15,6 @@ body {
 	background: #fafafa;
 }
 
-/*TOP BAR STARTS*/
-.top-bar {
-	padding: 10px 0px;
-}
-
-.top-bar .top-menu-item {
-	font-size: 16px;
-    margin: 0px;
-    color: #2e2e2d;
-    font-weight: 600;
-}
-
-.top-bar .top-menu-item a {
-	color: #fd2d5b;
-	font-weight: bold;
-}
-
-.top-bar .top-menu-item i {
-	margin-right: 10px;
-}
-
-.top-bar .navbar {
-	padding: 0px;
-}
-
-.top-bar .navbar-nav {
-	margin: 0 auto;
-}
-
-.top-bar .navbar-nav .nav-link {
-	padding: 0px 15px;
-	color: #2e2e2d;
-	font-weight: 600;
-}
-
-.top-bar .navbar-nav .nav-link:hover {
-	color: #fd2d5b;
-}
-
-.top-bar .shop-cart {
-	float: right;
-}
-/*TOP BAR ENDS*/
-
-/*HEADER STARTS*/
-.header {
-	background: #2E2E2D;
-}
-
-.header .logo {
-	max-width: 170px;
-}
-
-.header .navbar {
-	padding: 15px 0px;
-}
-
-.header .navbar-nav {
-	margin: 0 auto;
-}
-
-.header .navbar-nav li a {
-	color: #fff !important;
-	padding-right: 25px !important;
-	transition: 0.3s all ease-in;
-	-webkit-transition: 0.3s all ease-in;
-	-moz-transition: 0.3s all ease-in;
-	-o-transition: 0.3s all ease-in;
-}
-
-.header .navbar-nav li a:hover, .header .navbar-nav li.active a {
-	color: #fd2d5b !important;
-}
-
-.header .form-inline .form-control {
-	border-radius: 50px;
-	min-width: 270px;
-}
-
-.header .form-inline .btn-search {
-	background: transparent;
-	color: #fff;
-}
-/*HEADER ENDS*/
-
-/*CATEGORIES STARTS*/
-.categories-sidebar .wrapper {
-    display: flex;
-    width: 100%;
-    align-items: stretch;
-}
-
-#sidebar {
-    min-width: 200px;
-    max-width: 200px;
-    min-height: 100vh;
-    background: #fff;
-    color: #fff;
-    transition: all 0.3s;
-    padding-left: 15px;
-}
-
-#sidebar.active {
-    margin-left: -200px;
-}
-
-a[data-toggle="collapse"] {
-    position: relative;
-}
-
-.dropdown-toggle::after {
-    display: block;
-    position: absolute;
-    top: 50%;
-    right: 20px;
-    transform: translateY(-50%);
-}
-
-a, a:hover, a:focus {
-    color: inherit;
-    text-decoration: none;
-    transition: all 0.3s;
-}
-
-#sidebar ul p {
-    color: #666;
-    padding: 10px;
-    padding-left: 0px;
-    font-weight: 600;
-    font-size: 20px;
-    border-bottom: 1px solid #999;
-    max-width: 120px;
-}
-
-#sidebar ul li a {
-    padding: 10px 10px 5px 10px;
-    font-size: 1.1em;
-    display: block;
-    color: #666;
-    position: relative;
-}
-
-#sidebar ul li.active a:after {
-	content: '';
-	position: absolute;
-	min-width: 100px;
-	height: 1px;
-	background: #fd2d5b;
-	bottom: 0;
-	left: 0;
-}
-
-#sidebar ul li a:hover {
-    color: #fd2d5b;
-}
-
-#sidebar ul li.active > a, a[aria-expanded="true"] {
-    color: #fd2d5b;
-    font-weight: 600;
-}
-
-.categories-content {
-	width: 100%;
-}
-
-.categories-content .navbar-toggle {
-	display: none;
-}
-
-.categories-content .card {
-	margin-top: 15px;
-	font-family: 'Nunito Sans', sans-serif;
-	font-size: 15px;
-	color: #666;
-	padding: 1.25rem;
-	border-radius: 5px;
-	cursor: pointer;
-	margin-bottom: 15px;
-	transition: 0.2s all ease-in;
-	-webkit-transition: 0.2s all ease-in;
-	-moz-transition: 0.2s all ease-in;
-	-o-transition: 0.2s all ease-in;
-}
-
-.categories-content .card:hover {
-	box-shadow: 0 4px 15px rgba(0, 0, 0, 0.18);
-}
-
-.categories-content .card .card-title {
-	font-size: 24px;
-	text-align: center;
-	font-weight: 600;
-	color: #222;
-	margin-bottom: 0px;
-}
-
-.categories-content .card .price {
-	color: #fd2d5b;
-	font-size: 18px;
-	text-decoration: line-through;
-}
-
-.categories-content .card .btn {
-	padding: 6px 10px;
-    font-weight: 600;
-    font-size: 14px;
-    background: #fd2d5b;
-}
-
-.categories-content .card .card-img {
-    object-fit: contain;
-    max-height: 140px;
-    margin: 15px 0px;
-}
-
-.categories-content .card .card-body {
-	padding: 0px;
-}
-
-.categories-content .card .card-text {
-	font-size: 14px;
-	margin-top: 20px;
-}
-
-.categories-content .btn-toggle {
-	background: #fd2d5b;
-	border: none;
-}
-
-.categories-content .btn-toggle:focus {
-	box-shadow: none;
-}
-/*CATEGORIES ENDS*/
-
 /*PAGINATION STARTS*/
 .pagination-tab {
 	display: flex;
@@ -256,26 +22,33 @@ a, a:hover, a:focus {
 	margin: 15px 0px 0px 0px;
 }
 
-.pagination-tab .pagination li a {
+.pagination li a {
 	border: none;
 	color: #666;
 	cursor: pointer;
+	position: relative;
+    display: block;
+    padding: 0.5rem 0.75rem;
+    margin-left: -1px;
+    line-height: 1.25;
+    text-decoration: none;
 }
 
-.pagination-tab .pagination li a:focus {
+.pagination li a:focus {
 	box-shadow: none;
 }
 
-.pagination-tab .page-item {
+.pagination li {
 	margin-right: 5px;
 }
 
-.pagination-tab .page-item.active .page-link {
+.pagination li.active a {
 	background: #fd2d5b;
 	border-radius: 5px;
+	color: #fff;
 }
 
-.pagination-tab .page-item .before {
+.pagination li .before {
  	color: #b7b7b7;
  }
 /*PAGINATION ENDS*/
